@@ -1,0 +1,111 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.orlandev.filamenttest'
+    compileSdk rootProject.targetSdk
+
+    defaultConfig {
+        minSdk rootProject.minSdk
+        targetSdk rootProject.targetSdk
+        versionCode rootProject.versionCode
+        versionName rootProject.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("../santa_ifigenia.jks")
+            storePassword "Inmersoft20xx"
+            keyAlias "inmersoft"
+            keyPassword "Inmersoft20xx"
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility sourceCompatibility
+        targetCompatibility targetCompatibility
+    }
+    kotlinOptions {
+        jvmTarget = jvmTarget
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion compose_compiler
+    }
+
+    kapt {
+        correctErrorTypes true
+    }
+
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+}
+dependencies {
+
+    implementation "androidx.core:core-ktx:$core_ktx"
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    def filamentVersion = "1.31.5"
+    implementation("com.google.android.filament:filament-android:$filamentVersion")
+    implementation("com.google.android.filament:filament-utils-android:$filamentVersion")
+    implementation("com.google.android.filament:gltfio-android:$filamentVersion")
+
+    //COMPOSE
+    implementation platform("androidx.compose:compose-bom:$compose_bom")
+    implementation "androidx.activity:activity-compose:$activity_compose"
+    implementation "androidx.compose.foundation:foundation"
+    implementation "androidx.compose.ui:ui"
+    implementation "androidx.compose.ui:ui-tooling-preview"
+    implementation "androidx.compose.ui:ui-tooling"
+    implementation "androidx.compose.ui:ui-util"
+    implementation "androidx.compose.material:material"
+    implementation "androidx.compose.material3:material3"
+    implementation "androidx.compose.material3:material3-window-size-class"
+    implementation "androidx.compose.runtime:runtime"
+    implementation "androidx.compose.compiler:compiler:$compose_compiler"
+    implementation "androidx.compose.material:material-icons-core"
+    implementation "androidx.compose.material:material-icons-extended"
+    implementation "androidx.navigation:navigation-compose:2.5.3"
+    implementation "androidx.constraintlayout:constraintlayout-compose:1.0.1"
+
+    implementation("androidx.paging:paging-compose:1.0.0-alpha18")
+
+
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
+
+    // ViewModel utilities for Compose
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
+
+    //Coil Image Loader Library
+    implementation "io.coil-kt:coil:2.2.2"
+    implementation "io.coil-kt:coil-compose:2.2.2"
+
+    testImplementation "junit:junit:$junit"
+    androidTestImplementation "androidx.test.ext:junit:$ext_junit"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core"
+
+
+}
